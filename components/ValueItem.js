@@ -31,7 +31,7 @@ export default class ValueItem extends Component<{}> {
         }}
         key={title}
       >
-        <Animated.Text style={{fontWeight: '800', color: '#fff', fontSize, width: '100%', textAlign: 'center' }}>
+        <Animated.Text style={{fontWeight: '600', color: '#fff', fontSize, width: '100%', textAlign: 'center' }}>
           {title}
         </Animated.Text>
         <View

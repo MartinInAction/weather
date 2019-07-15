@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Animated, TextInput } from 'react-native';
-import TouchableView from "./TouchableView";
-import ValueItem from './ValueItem';
-import GradientHelper from './Gradienthelper';
-import Svg, { Path } from 'react-native-svg';
-import debounce from 'lodash.debounce';
+import React, { Component } from "react";
+import { StyleSheet, View, Animated, TextInput } from "react-native";
+import TouchableView from './TouchableView';
+import ValueItem from "./ValueItem";
+import GradientHelper from "./Gradienthelper";
+import Svg, { Path } from "react-native-svg";
+import debounce from "lodash.debounce";
 
 import {
   BALL_SIZE,
@@ -23,8 +23,8 @@ import {
   VALUE_PADDING,
   VISIBLE_HOURS,
   width,
-  VALUE_ITEM_WIDTH,
-} from '../consts/Commons';
+  VALUE_ITEM_WIDTH
+} from "../consts/Commons";
 
 const AnimatedGradientHelper = Animated.createAnimatedComponent(GradientHelper);
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
@@ -71,7 +71,7 @@ export default class StartContainer extends Component<{}> {
     // this._textOpacity.setValue(1)
     Animated.timing(this._textOpacity, {
       toValue: 1,
-      duration: 100
+      duration: 100,
     }).start();
   }
 
@@ -96,7 +96,7 @@ export default class StartContainer extends Component<{}> {
     this._absoluteTranslateX.addListener(({ value }) => {
       let showValue = (value * 24) / (width - 2 * VALUE_PADDING);
       this.mainText.setNativeProps({
-        text: Math.floor(showValue).toString()
+        text: Math.floor(showValue).toString(),
       });
       this._textOpacity.setValue(0.5);
       this._animateTextOpacityDelayed(1);
@@ -113,7 +113,7 @@ export default class StartContainer extends Component<{}> {
     Animated.spring(this._curve, {
       toValue,
       duration: 200,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   }
 
@@ -131,12 +131,12 @@ export default class StartContainer extends Component<{}> {
     const color1 = this._nonNativeX.interpolate({
       inputRange: this._positionRange,
       outputRange: this._color1Range,
-      extrapolate: 'clamp'
+      extrapolate: "clamp",
     });
     const color2 = this._nonNativeX.interpolate({
       inputRange: this._positionRange,
       outputRange: this._color2Range,
-      extrapolate: 'clamp'
+      extrapolate: "clamp",
     });
 
     return (
@@ -145,8 +145,8 @@ export default class StartContainer extends Component<{}> {
         color2={color2}
         style={{
           height: GRADIENT_HEIGHT,
-          alignItems: 'center',
-          justifyContent: 'center',
+          alignItems: "center",
+          justifyContent: "center"
         }}
       >
         {this._renderMainValue()}
@@ -161,7 +161,7 @@ export default class StartContainer extends Component<{}> {
         pointerEvents="none"
         defaultValue="0"
         underlineColorAndroid="transparent"
-        style={{ color: 'white', fontSize: 150, opacity: this._textOpacity }}
+        style={{ color: "white", fontSize: 150, opacity: this._textOpacity }}
       />
     );
   }
@@ -172,7 +172,7 @@ export default class StartContainer extends Component<{}> {
         style={{
           height: 50,
           marginTop: -50,
-          flexDirection: 'row'
+          flexDirection: "row",
         }}
       >
         {VISIBLE_HOURS.map((item, index) => {
@@ -220,17 +220,17 @@ export default class StartContainer extends Component<{}> {
     this.touchesEnded = false;
     Animated.spring(this._absoluteTranslateX, {
       toValue: this._getOptimizedAbsoluteX(x),
-      duration: 200,
+      duration: 200
       // useNativeDriver: true
     }).start();
     Animated.spring(this._nonNativeX, {
       toValue: this._getOptimizedAbsoluteX(x),
-      duration: 1000
+      duration: 1000,
     }).start();
     Animated.spring(this._ballTranslateX, {
       toValue: this._getOptimizedX(x),
       duration: 200,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
     this._animateCurve(1);
     setTimeout(() => {
@@ -266,16 +266,16 @@ export default class StartContainer extends Component<{}> {
     const translateY = this._curve.interpolate({
       inputRange: [0, 1],
       outputRange: [-BALL_SIZE / 2, -10],
-      extrapolate: 'clamp'
+      extrapolate: "clamp",
     });
 
     return (
       <View
         style={{
           height: BAR_HEIGHT * 2,
-          position: 'absolute',
-          width: '100%',
-          top: GRADIENT_HEIGHT - BAR_HEIGHT,
+          position: "absolute",
+          width: "100%",
+          top: GRADIENT_HEIGHT - BAR_HEIGHT
         }}
       >
         <TouchableView
@@ -304,22 +304,22 @@ export default class StartContainer extends Component<{}> {
         >
           <View
             style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              backgroundColor: 'transparent',
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+              backgroundColor: "transparent"
             }}
           />
 
           <Animated.View
             style={{
-              alignItems: 'center',
+              alignItems: "center",
               width: BAR_WIDTH,
               transform: [
                 {
-                  translateX: this._ballTranslateX
-                }
-              ]
+                  translateX: this._ballTranslateX,
+                },
+              ],
             }}
           >
             <Svg style={{ height: BAR_HEIGHT, width: BAR_WIDTH }}>
@@ -334,9 +334,9 @@ export default class StartContainer extends Component<{}> {
               style={{
                 transform: [
                   {
-                    translateY
-                  }
-                ],
+                    translateY,
+                  },
+                ]
               }}
             >
               <View
@@ -344,17 +344,17 @@ export default class StartContainer extends Component<{}> {
                   height: BALL_SIZE,
                   width: BALL_SIZE,
                   borderRadius: BALL_SIZE / 2,
-                  backgroundColor: 'white',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  backgroundColor: "#fff",
+                  justifyContent: "center",
+                  alignItems: "center",
                   elevation: 3,
-                  shadowColor: "#000",
+                  shadowColor: '#000',
                   shadowOffset: {
                     width: 0,
-                    height: 4,
+                    height: 4
                   },
-                  shadowOpacity: 0.1,
-                  shadowRadius: 6
+                  shadowOpacity: 0.3,
+                  shadowRadius: 6,
                 }}
               />
             </Animated.View>
@@ -368,6 +368,6 @@ export default class StartContainer extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  },
+    backgroundColor: "white",
+  }
 });
